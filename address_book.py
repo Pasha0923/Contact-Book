@@ -1,4 +1,4 @@
-# FILE: address_book.py
+# address_book.py
 from collections import UserDict
 from datetime import datetime, date, timedelta
 from models import Record

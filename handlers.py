@@ -1,3 +1,4 @@
+# handlers.py
 from address_book import AddressBook
 from models import Record
 from functools import wraps
@@ -82,8 +83,8 @@ def show_all(book: AddressBook):
     return "\n".join(result)
 
 @input_error
-def add_birthday(args, book: AddressBook):
-    # args: ["John", "01.01.1990"]
+def add_birthday(args, book: AddressBook): # Додає день народження контакту за ім'ям
+    # args: ["John", "01.01.1990"]   
     name, birthday_str = args
     record = book.find(name)
     if record is None:
@@ -91,21 +92,19 @@ def add_birthday(args, book: AddressBook):
     record.add_birthday(birthday_str)
     return f"Birthday for {name} to {birthday_str}"
 
-
 @input_error
-def show_birthday(args, book: AddressBook):
+def show_birthday(args, book: AddressBook): # Показує день народження контакту за ім'ям
     # args: ["John"]
     name, *_ = args
     record = book.find(name)
     if record is None:
         return "❌ Contact not found"
     if not record.birthday:
-        return f"No birthday set for {name}"
+        return f"No birthday for {name}"
     return f"{name}'s birthday is: {record.birthday.value}"
 
 @input_error
-def birthdays(book: AddressBook):
-    """Обробника для команди 'birthdays' - показує імена та дні народження користувачів, у яких дні народження протягом наступних 7 днів"""
+def birthdays(book: AddressBook): # Показує всі дні народження, які відзначаються в найближчі 7 днів
     upcoming = book.get_upcoming_birthdays(days=7)
     if isinstance(upcoming, str):
         return upcoming 
