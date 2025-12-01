@@ -53,7 +53,7 @@ def add_contact(args, book: AddressBook):
 
 
 @input_error
-def change_contact(args, book: AddressBook):
+def change_contact(args, book: AddressBook): # Змінює номер телефону контакту за ім'ям
     # args: ["John", "1234567890", "0987654321"]
     name, old_phone, new_phone = args
     record = book.find(name)
@@ -80,18 +80,18 @@ def show_all(book: AddressBook): # Показує всі контакти в а�
     result = []
     for record in book.data.values():
         phones = ', '.join(phone.value for phone in record.phones) if record.phones else "No phone numbers"
-        if record.birthday:
+        if record.birthday: 
             result.append(f"{record.name.value}: {phones} | Birthday: {record.birthday.value}")
         else:
             result.append(f"{record.name.value}: {phones} | No birthday")
     return "\n".join(result)
 
 @input_error
-def delete_phone(args, book: AddressBook):
+def delete_phone(args, book: AddressBook): # Видаляє номер телефону контакту за ім'ям
     # args: ["John", "1234567890"]
     name, phone_str = args
     record = book.find(name)
-    phone = Phone(phone_str)  # якщо некоректний номер буде викликана помилка валідації
+    phone = Phone(phone_str)  
     result = record.remove_phone(phone.value)
     if result:
         return f"Phone {phone.value} removed for {name}"
