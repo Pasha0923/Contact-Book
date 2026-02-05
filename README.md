@@ -4,9 +4,14 @@ A simple command-line contact book assistant bot written in **Python 3.13**, usi
 
 This console bot helps you manage contacts: add, edit, delete, and search for phone numbers.
  Contacts can have multiple phone numbers, and each phone number is validated (must be exactly 10 digits). Additionally, contacts can store a birthday date, which is validated and used to track upcoming birthdays and send timely greetings.
+ This address book is automatically saved to disk when you exit the program and restored when you start it again, so you never lose your contacts!
 
- ---
-
+---
+## 💾 Data Persistence
+* All your contacts and their data are automatically saved to a file (addressbook.pkl) when you exit the program
+* When you start the program again, your address book is restored from disk — you never lose your data between sessions.
+* This is implemented using Python's pickle serialization protocol.
+---
 ## 🧠 Features
 
 - Interactive console assistant bot interface  
