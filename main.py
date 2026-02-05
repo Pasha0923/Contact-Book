@@ -1,8 +1,10 @@
+from storage import load_data, save_data
 from address_book import AddressBook
 from handlers import parse_input
 from handlers import add_contact, change_contact, show_phone, show_all, add_birthday, show_birthday, birthdays , delete_phone
 def main():
-    book = AddressBook()
+    book = load_data() # завантажуємо адресну книгу при старті
+    # book = AddressBook()
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
@@ -11,6 +13,7 @@ def main():
         command, args = parse_input(user_input) 
         print(f"Command: {command} Arguments: {args}") 
         if command in ["close", "exit"]:
+            save_data(book)  # зберігаємо книгу перед виходом команадами "close" або "exit"
             print("Good bye!")
             break
         elif command == "hello":
